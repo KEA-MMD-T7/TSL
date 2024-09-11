@@ -9,9 +9,6 @@ fetch(url, options)
   .then(bygKatNav);
 
 function bygKatNav(data) {
-  // let kats = [];
-  // data.forEach((elm) => kats.push(elm.Taksonomi_1));
-  // const katOnce = new Set(kats);
   const katOnce = new Set(data.map((elm) => elm.Taksonomi_2));
   katOnce.forEach((kat) => {
     if (kat != "") {
