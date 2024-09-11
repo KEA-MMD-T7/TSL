@@ -9,5 +9,5 @@ fetch(url, options)
   .then(vis);
 
 function vis(data) {
-  console.log(data);
+  console.table(data);
 }
