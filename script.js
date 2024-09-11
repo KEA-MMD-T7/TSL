@@ -10,7 +10,7 @@ fetch(url, options)
 
 function bygKatNav(data) {
   let kats = [];
-  data.forEach((elm) => kats.push(elm.Mærke));
+  data.forEach((elm) => kats.push(elm.Taksonomi_1));
   const katOnce = new Set(kats);
   console.log(katOnce);
   katOnce.forEach((kat) => {
@@ -22,5 +22,5 @@ function bygKatNav(data) {
 }
 
 function vis(data) {
-  console.table(data);
+  console.log(data);
 }
