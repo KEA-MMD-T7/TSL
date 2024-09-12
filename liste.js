@@ -26,9 +26,7 @@ function hentData() {
 }
 
 function vis(data) {
-  //console.log(data.length);
   h1.textContent += ` (${data.length} stk)`;
-  //console.log(data);
   const alle_navne = {};
   data.forEach((dims) => {
     const navn = dims.Produktnavn_model;
@@ -36,6 +34,8 @@ function vis(data) {
       alle_navne[navn] = (alle_navne[navn] || 0) + 1;
     }
   });
+
+  console.log(alle_navne);
   Object.entries(alle_navne).forEach(([navn, count]) => {
     ul.innerHTML += `<li>${navn} (${count} stk)</li>`;
   });
