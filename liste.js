@@ -24,6 +24,7 @@ function hentData() {
     .then((res) => res.json())
     .then(vis);
 }
+}
 
 function vis(data) {
   //console.log(data.length);
