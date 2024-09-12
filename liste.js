@@ -23,24 +23,20 @@ function hentData() {
   fetch(katUrl, options)
     .then((res) => res.json())
     .then(vis);
+}
 
-  function vis(data) {
-    //console.log(data.length);
-    h1.textContent += ` (${data.length} stk)`;
-    console.log(data);
-
-    let navne = [];
-    let antal = 1;
-    data.forEach((row) => {
-      if (!navne.includes(row.Produktnavn_model)) {
-        navne.push(row.Produktnavn_model);
-        ul.innerHTML += `<li>${row.Produktnavn_model} ()</li>`;
-      }
-    });
-
-    // const once = new Set(data.map((elm) => elm.Produktnavn_model));
-    // console.log(once);
-    // once.forEach((element) => {
-    // });
-  }
+function vis(data) {
+  //console.log(data.length);
+  h1.textContent += ` (${data.length} stk)`;
+  //console.log(data);
+  const alle_navne = {};
+  data.forEach((dims) => {
+    const navn = dims.Produktnavn_model;
+    if (navn) {
+      alle_navne[navn] = (alle_navne[navn] || 0) + 1;
+    }
+  });
+  Object.entries(alle_navne).forEach(([navn, count]) => {
+    ul.innerHTML += `<li>${navn} (${count} stk)</li>`;
+  });
 }
