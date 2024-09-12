@@ -27,9 +27,10 @@ function hentData() {
 
 function vis(data) {
   h1.textContent += ` (${data.length} stk)`;
+
   const alle_navne = {};
-  data.forEach((dims) => {
-    const navn = dims.Produktnavn_model;
+  data.forEach((produkt) => {
+    const navn = produkt.Produktnavn_model;
     if (navn) {
       alle_navne[navn] = (alle_navne[navn] || 0) + 1;
     }
