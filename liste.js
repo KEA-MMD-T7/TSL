@@ -3,10 +3,11 @@ const kat = params.get("kat");
 window.addEventListener("load", init);
 console.log(kat);
 
-let ul;
+let h1, ul;
 
 function init() {
-  document.querySelector("h1").textContent = kat;
+  h1 = document.querySelector("h1");
+  h1.textContent = kat;
   ul = document.querySelector("ul");
   hentData();
 }
@@ -25,7 +26,8 @@ function hentData() {
     .then(vis);
 
   function vis(data) {
-    console.log(data);
+    console.log(data.length);
+    h1.textContent += ` (${data.length} stk)`;
     const once = new Set(data.map((elm) => elm.Produktnavn_model));
     once.forEach((element) => {
       ul.innerHTML += `<li>${element}</li>`;
