@@ -32,7 +32,7 @@ function hentData() {
     console.log(data);
 
     let navne = [];
-    let antal = 0;
+    let antal = 1;
     data.forEach((row) => {
       if (!navne.includes(row.Produktnavn_model)) {
         navne.push(row.Produktnavn_model);
