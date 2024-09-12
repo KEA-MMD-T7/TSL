@@ -1,8 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const kat = params.get("kat");
-
 window.addEventListener("load", init);
-console.log(kat);
 
 let h1, ul;
 
