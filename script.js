@@ -6,7 +6,7 @@ const options = {
 
 fetch(url, options)
   .then((res) => res.json())
-  .then(vis);
+  .then(bygKatNav);
 
 function bygKatNav(data) {
   const katOnce = new Set(data.map((elm) => elm.Taksonomi_2));
