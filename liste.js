@@ -1,5 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const kat = params.get("kat");
+
 window.addEventListener("load", init);
 console.log(kat);
 
@@ -26,11 +27,22 @@ function hentData() {
     .then(vis);
 
   function vis(data) {
-    console.log(data.length);
+    //console.log(data.length);
     h1.textContent += ` (${data.length} stk)`;
-    const once = new Set(data.map((elm) => elm.Produktnavn_model));
-    once.forEach((element) => {
-      ul.innerHTML += `<li>${element}</li>`;
+    console.log(data);
+
+    let navne = [];
+    let antal = 0;
+    data.forEach((row) => {
+      if (!navne.includes(row.Produktnavn_model)) {
+        navne.push(row.Produktnavn_model);
+        ul.innerHTML += `<li>${row.Produktnavn_model} ()</li>`;
+      }
     });
+
+    // const once = new Set(data.map((elm) => elm.Produktnavn_model));
+    // console.log(once);
+    // once.forEach((element) => {
+    // });
   }
 }
