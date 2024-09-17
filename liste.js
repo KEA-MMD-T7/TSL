@@ -13,7 +13,7 @@ function init() {
   hentData();
 }
 
-const katUrl = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Taksonomi_1=eq.${kat}`;
+const katUrl = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Type=eq.${kat}`;
 
 function hentData() {
   fetch(katUrl, options)
@@ -33,7 +33,7 @@ function vis(data) {
     }
   });
 
-  //console.log(alle_navne);
+  console.log(alle_navne);
   Object.entries(alle_navne).forEach(([navn, count]) => {
     ul.innerHTML += `<li>${navn} (${count} stk)</li>`;
   });
