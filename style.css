@@ -1,0 +1,15 @@
+body {
+  max-width: 800px;
+  margin: auto;
+}
+a {
+  margin: 0.2rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: cornflowerblue;
+  display: inline-block;
+  /* width: 10rem; */
+  text-decoration: none;
+  color: white;
+  text-align: center;
+}
