@@ -10,15 +10,35 @@ function init() {
   h2 = document.querySelector("h2");
   h2.textContent = kat;
   ul = document.querySelector("ul");
-  hentData();
+  hentData(url, bygKatNav);
 }
 
-const katUrl = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Type=eq.${kat}`;
+const url = "https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL";
 
-function hentData() {
-  fetch(katUrl, options)
+const options = {
+  headers: {
+    apikey: key,
+  },
+};
+
+function hentData(url, funkt) {
+  fetch(url, options)
     .then((res) => res.json())
-    .then(vis);
+    .then(funkt);
+}
+
+function bygKatNav(data) {
+  const type = new Set(data.map((elm) => elm.Taksonomi_1));
+  type.forEach((elm) => {
+    if (elm != "") {
+      let knap = document.createElement("button");
+      knap.textContent = elm;
+      const nyUrl = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Taksonomi_1=eq.${elm}&Type=eq.${kat}`;
+      knap.addEventListener("click", () => hentData(nyUrl, vis));
+      //knap.href = `liste.html?kategori=${elm}`;
+      document.querySelector("nav").appendChild(knap);
+    }
+  });
 }
 
 function vis(data) {
