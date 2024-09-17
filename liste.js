@@ -4,7 +4,7 @@ window.addEventListener("load", init);
 
 console.log(kat);
 
-let h1, ul;
+let h1, h2, ul;
 
 function init() {
   h2 = document.querySelector("h2");
@@ -13,13 +13,7 @@ function init() {
   hentData();
 }
 
-const katUrl = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Taksonomi_2=eq.${kat}`;
-
-// const options = {
-//   headers: {
-//     apikey: key,
-//   },
-// };
+const katUrl = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Taksonomi_1=eq.${kat}`;
 
 function hentData() {
   fetch(katUrl, options)

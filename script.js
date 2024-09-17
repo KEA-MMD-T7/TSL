@@ -13,7 +13,7 @@ function hentKats() {
 }
 
 function bygKatNav(data) {
-  const katOnce = new Set(data.map((elm) => elm.Taksonomi_2));
+  const katOnce = new Set(data.map((elm) => elm.Taksonomi_1));
   katOnce.forEach((kat) => {
     if (kat != "") {
       let knap = document.createElement("a");
