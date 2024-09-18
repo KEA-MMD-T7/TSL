@@ -22,6 +22,7 @@ const options = {
 };
 
 function hentData(url, funkt) {
+  console.log(url);
   fetch(url, options)
     .then((res) => res.json())
     .then(funkt);
@@ -33,7 +34,8 @@ function bygKatNav(data) {
     if (elm != "") {
       let knap = document.createElement("button");
       knap.textContent = elm;
-      const nyUrl = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Taksonomi_1=eq.${elm}&Type=eq.${kat}`;
+      const url = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Taksonomi_1=eq.${elm}&Type=eq.${kat}`;
+      const nyUrl = encodeURI(url);
       knap.addEventListener("click", () => hentData(nyUrl, vis));
       //knap.href = `liste.html?kategori=${elm}`;
       document.querySelector("nav").appendChild(knap);
@@ -47,13 +49,13 @@ function vis(data) {
   const alle_navne = {};
   ul.textContent = "";
   data.forEach((produkt) => {
+    console.log(produkt, alle_navne);
     const navn = produkt.Produktnavn_model;
     if (navn) {
       alle_navne[navn] = (alle_navne[navn] || 0) + 1;
     }
   });
 
-  console.log(alle_navne);
   Object.entries(alle_navne).forEach(([navn, count]) => {
     ul.innerHTML += `<li>${navn} (${count} stk)</li>`;
   });
