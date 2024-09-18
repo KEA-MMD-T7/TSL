@@ -29,7 +29,7 @@ function hentData(url, funkt) {
 
 function bygKatNav(data) {
   alleAfTypen = data;
-  console.log(alleAfTypen);
+  document.querySelector("nav button").addEventListener("click", filtrer);
   const type = new Set(data.map((elm) => elm.Mærke));
   type.forEach((elm) => {
     if (elm != "") {
