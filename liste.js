@@ -2,18 +2,17 @@ const params = new URLSearchParams(window.location.search);
 const kat = params.get("kategori");
 window.addEventListener("load", init);
 
-console.log(kat);
-
-let h1, h2, ul;
+let h1, h2, ul, url, filter, alleAfTypen;
 
 function init() {
+  console.log(kat);
   h2 = document.querySelector("h2");
   h2.textContent = kat;
   ul = document.querySelector("ul");
+  //encKat = encodeURI(kat);
+  url = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Type=eq.${kat}`;
   hentData(url, bygKatNav);
 }
-
-const url = "https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL";
 
 const options = {
   headers: {
@@ -29,30 +28,38 @@ function hentData(url, funkt) {
 }
 
 function bygKatNav(data) {
-  const type = new Set(data.map((elm) => elm.Taksonomi_1));
+  alleAfTypen = data;
+  console.log(alleAfTypen);
+  const type = new Set(data.map((elm) => elm.Mærke));
   type.forEach((elm) => {
     if (elm != "") {
       let knap = document.createElement("button");
       knap.textContent = elm;
-      const url = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Taksonomi_1=eq.${elm}&Type=eq.${kat}`;
-      const nyUrl = encodeURI(url);
-      knap.addEventListener("click", () => hentData(nyUrl, vis));
-      //knap.href = `liste.html?kategori=${elm}`;
+      knap.dataset.mrk = elm;
+      knap.addEventListener("click", filtrer);
       document.querySelector("nav").appendChild(knap);
     }
   });
+  vis(data);
+}
+
+function filtrer() {
+  filter = this.dataset.mrk;
+  vis(alleAfTypen);
 }
 
 function vis(data) {
+  console.log(filter);
   h2.textContent = `${kat} (${data.length} stk)`;
 
   const alle_navne = {};
   ul.textContent = "";
   data.forEach((produkt) => {
-    console.log(produkt, alle_navne);
-    const navn = produkt.Produktnavn_model;
-    if (navn) {
-      alle_navne[navn] = (alle_navne[navn] || 0) + 1;
+    if (produkt.Mærke == filter || !filter) {
+      const navn = produkt.Produktnavn_model;
+      if (navn) {
+        alle_navne[navn] = (alle_navne[navn] || 0) + 1;
+      }
     }
   });
 
