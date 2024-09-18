@@ -1,19 +1,17 @@
 const params = new URLSearchParams(window.location.search);
-const kat = params.get("kategori");
-window.addEventListener("load", init);
-
-console.log(kat);
-
+const kategori = params.get("type");
 let h1, h2, ul;
+
+window.addEventListener("load", init);
 
 function init() {
   h2 = document.querySelector("h2");
-  h2.textContent = kat;
+  h2.textContent = kategori;
   ul = document.querySelector("ul");
   hentData();
 }
 
-const katUrl = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Type=eq.${kat}`;
+const katUrl = `https://jftyavgnjvzhcjchqdpg.supabase.co/rest/v1/TSL?Type=eq.${kategori}`;
 
 function hentData() {
   fetch(katUrl, options)
@@ -22,7 +20,7 @@ function hentData() {
 }
 
 function vis(data) {
-  h2.textContent = `${kat} (${data.length} stk)`;
+  h2.textContent = `${kategori} (${data.length} stk)`;
 
   const alle_navne = {};
   ul.textContent = "";

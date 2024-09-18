@@ -13,13 +13,13 @@ function hentKats() {
 }
 
 function bygKatNav(data) {
-  const katOnce = new Set(data.map((elm) => elm.Type));
-  katOnce.forEach((kat) => {
-    if (kat != "") {
-      let knap = document.createElement("a");
-      knap.textContent = kat;
-      knap.href = `liste.html?kategori=${kat}`;
-      document.querySelector("nav").appendChild(knap);
+  const enAfHvertType = new Set(data.map((elm) => elm.Type));
+  enAfHvertType.forEach((type) => {
+    if (type != "") {
+      let link = document.createElement("a");
+      link.textContent = type;
+      link.href = `liste.html?type=${type}`;
+      document.querySelector("nav").appendChild(link);
     }
   });
 }
